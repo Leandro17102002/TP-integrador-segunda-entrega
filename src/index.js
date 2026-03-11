@@ -1,3 +1,4 @@
+
 require ('dotenv').config();
 
 const app = require('./app');
@@ -9,5 +10,5 @@ conexionMongo();
 
 
 app.listen(PORT, ()=> {
-    console.log(`Servidor escuchando en http://localhost:tp-integrador-segunda-entrega-production.up.railway.app:${PORT}`);
+    console.log(`Servidor escuchando en https://tp-integrador-segunda-entrega-production.up.railway.app/`);
 });
