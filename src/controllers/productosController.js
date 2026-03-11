@@ -1,4 +1,5 @@
 const productoCollection = require("../models/productosModel");
+/* const validarObjectId = (id) => {mongoose.Types.ObjectId.isValid(id)}; */
 
 const dameProductos = (req, res) => {
 res.send("productos");
@@ -60,11 +61,11 @@ const obtenerProductoPorId = async (req, res) => {
     try {
         const { id } = req.params;
 
-    if (!validarObjectId(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ mensaje: "ID inválido" });
     }
 
-    const producto = await Producto.findById(id);
+    const producto = await productoCollection.findById(id);
 
     if (!producto) {
         return res.status(404).json({ mensaje: "Producto no encontrado" });
