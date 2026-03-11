@@ -1,4 +1,5 @@
 const productoCollection = require("../models/productosModel");
+const mongoose = require("mongoose");
 /* const validarObjectId = (id) => {mongoose.Types.ObjectId.isValid(id)}; */
 
 const dameProductos = (req, res) => {
