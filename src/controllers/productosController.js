@@ -82,11 +82,10 @@ const actualizarProducto = async (req, res) => {
             return res.status(400).json({ mensaje: "ID inválido" });
         }
 
-        // actualizar producto
         const productoActualizado = await productoCollection.findByIdAndUpdate(
             id,
             { producto, precio, stock },
-            { new: true } // devuelve el documento actualizado
+            { new: true } 
         );
 
         if (!productoActualizado) {
@@ -108,10 +107,39 @@ const actualizarProducto = async (req, res) => {
     }
 };
 
+const eliminarProducto = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ mensaje: "ID inválido" });
+        }
+
+        const productoEliminado = await productoCollection.findByIdAndDelete(id);
+
+        if (!productoEliminado) {
+            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        }
+
+        res.json({
+            message: "Producto eliminado correctamente"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Error al eliminar el producto",
+            error: error.message
+        });
+
+    }
+};
+
 
 module.exports = {
     crearProducto,
     obtenerProductoPorId,
     listarProductos,
-    actualizarProducto
+    actualizarProducto,
+    eliminarProducto
 };
