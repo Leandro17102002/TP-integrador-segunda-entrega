@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const productoCollection = new mongoose.Schema({
-    id:{
-        type: Number,
-        unique: true,
-        required: true
-    },
     producto:{
         type: String,
         required: true,

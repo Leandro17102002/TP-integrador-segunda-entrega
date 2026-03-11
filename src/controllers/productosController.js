@@ -1,22 +1,16 @@
 const productoCollection = require("../models/productosModel");
 const mongoose = require("mongoose");
-/* const validarObjectId = (id) => {mongoose.Types.ObjectId.isValid(id)}; */
-
-const dameProductos = (req, res) => {
-res.send("productos");
-};
 
 const crearProducto = async (req, res) => {
-    const {id, producto, precio, stock } = req.body;
+    const {producto, precio, stock } = req.body;
 
-    if (!id || !producto || !precio || !stock) {
+    if (!producto || !precio || !stock) {
     return res.status(400).json({
         message: "Faltan datos obligatorios",
         requiredFields: ["id", "producto", "precio", "stock"],
     });
 }
 const productoNuevo = {
-    id,
     producto,
     precio,
     stock,
