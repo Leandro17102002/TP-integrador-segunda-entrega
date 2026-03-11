@@ -7,29 +7,29 @@ const crearProducto = async (req, res) => {
     if (!producto || !precio || !stock) {
     return res.status(400).json({
         message: "Faltan datos obligatorios",
-        requiredFields: ["id", "producto", "precio", "stock"],
+        requiredFields: ["producto", "precio", "stock"],
     });
-}
-const productoNuevo = {
-    producto,
-    precio,
-    stock,
-};
+    }
+    const productoNuevo = {
+        producto,
+        precio,
+        stock,
+    };
 
-try {
-    const productoNuevoMongo = new productoCollection(productoNuevo);
-    await productoNuevoMongo.save();
+    try {
+        const productoNuevoMongo = new productoCollection(productoNuevo);
+        await productoNuevoMongo.save();
 
-    res.json({
-        message: "Producto registrado",
-        "Nuevo producto": productoNuevo,
-    });
-} catch (error) {
-    res.status(500).json({
-        message: "Error al guardar el producto",
-        error: error.message,
-    });
-}
+        res.json({
+            message: "Producto registrado",
+            "Nuevo producto": productoNuevo,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al guardar el producto",
+            error: error.message,
+        });
+    }
 };
 
 
@@ -74,7 +74,6 @@ const obtenerProductoPorId = async (req, res) => {
 
 
 module.exports = {
-    dameProductos,
     crearProducto,
     obtenerProductoPorId,
     listarProductos
