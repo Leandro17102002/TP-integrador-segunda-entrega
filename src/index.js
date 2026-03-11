@@ -9,5 +9,5 @@ conexionMongo();
 
 
 app.listen(PORT, ()=> {
-    console.log(`Servidor escuchando en el puerto http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en http://localhost:tp-integrador-segunda-entrega-production.up.railway.app:${PORT}`);
 });
