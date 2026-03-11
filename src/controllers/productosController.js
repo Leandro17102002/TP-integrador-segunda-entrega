@@ -5,7 +5,7 @@ res.send("productos");
 };
 
 const crearProducto = async (req, res) => {
-const { id, producto, precio, stock } = req.body;
+    const { id, producto, precio, stock } = req.body;
 
     if (!id || !producto || !precio || !stock) {
     return res.status(400).json({
@@ -56,7 +56,7 @@ const listarProductos = async (req, res) => {
 }
 
 
-const obtenerProductoPorId = async (req, res) => {
+export const obtenerProductoPorId = async (req, res) => {
     try {
         const { id } = req.params;
 
