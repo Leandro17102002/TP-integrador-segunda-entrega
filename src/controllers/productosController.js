@@ -1,6 +1,24 @@
 const productoCollection = require("../models/productosModel");
 const mongoose = require("mongoose");
 
+const listarProductos = async (req, res) => {
+
+    try{
+        const arrayProductos = await productoCollection.find();
+        console.log(arrayProductos);
+
+        res.json({
+            message: 'Productos listados correctamente',
+            data: arrayProductos
+        });
+    }catch(error){
+        res.status(500).json({
+        message: 'Error al guardar el producto',
+        error: error.message
+        });
+    }
+}
+
 const crearProducto = async (req, res) => {
     const {producto, precio, stock } = req.body;
 
@@ -33,25 +51,6 @@ const crearProducto = async (req, res) => {
 };
 
 
-const listarProductos = async (req, res) => {
-
-    try{
-        const arrayProductos = await productoCollection.find();
-        console.log(arrayProductos);
-
-        res.json({
-            message: 'Productos listados correctamente',
-            data: arrayProductos
-        });
-    }catch(error){
-        res.status(500).json({
-        message: 'Error al guardar el producto',
-        error: error.message
-        });
-    }
-}
-
-
 const obtenerProductoPorId = async (req, res) => {
     try {
         const { id } = req.params;
@@ -73,8 +72,46 @@ const obtenerProductoPorId = async (req, res) => {
 };
 
 
+const actualizarProducto = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { producto, precio, stock } = req.body;
+
+        // validar id
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ mensaje: "ID inválido" });
+        }
+
+        // actualizar producto
+        const productoActualizado = await productoCollection.findByIdAndUpdate(
+            id,
+            { producto, precio, stock },
+            { new: true } // devuelve el documento actualizado
+        );
+
+        if (!productoActualizado) {
+            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        }
+
+        res.status(200).json({
+            message: "Producto actualizado correctamente",
+            data: productoActualizado
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Error al actualizar el producto",
+            error: error.message
+        });
+
+    }
+};
+
+
 module.exports = {
     crearProducto,
     obtenerProductoPorId,
-    listarProductos
+    listarProductos,
+    actualizarProducto
 };
