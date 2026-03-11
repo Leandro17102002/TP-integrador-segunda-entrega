@@ -5,7 +5,7 @@ res.send("productos");
 };
 
 const crearProducto = async (req, res) => {
-    const { id, producto, precio, stock } = req.body;
+    const {id, producto, precio, stock } = req.body;
 
     if (!id || !producto || !precio || !stock) {
     return res.status(400).json({
@@ -25,13 +25,13 @@ try {
     await productoNuevoMongo.save();
 
     res.json({
-    message: "Producto registrado",
-    "Nuevo producto": productoNuevo,
+        message: "Producto registrado",
+        "Nuevo producto": productoNuevo,
     });
 } catch (error) {
     res.status(500).json({
-    message: "Error al guardar el producto",
-    error: error.message,
+        message: "Error al guardar el producto",
+        error: error.message,
     });
 }
 };
@@ -40,23 +40,23 @@ try {
 const listarProductos = async (req, res) => {
 
     try{
-    const arrayProductos = await productoCollection.find();
-    console.log(arrayProductos);
+        const arrayProductos = await productoCollection.find();
+        console.log(arrayProductos);
 
-    res.json({
-        message: 'Productos listados correctamente',
-        data: arrayProductos
-    });
+        res.json({
+            message: 'Productos listados correctamente',
+            data: arrayProductos
+        });
     }catch(error){
-    res.status(500).json({
-    message: 'Error al guardar el producto',
-    error: error.message
-    });
+        res.status(500).json({
+        message: 'Error al guardar el producto',
+        error: error.message
+        });
     }
 }
 
 
-export const obtenerProductoPorId = async (req, res) => {
+const obtenerProductoPorId = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -78,8 +78,8 @@ export const obtenerProductoPorId = async (req, res) => {
 
 
 module.exports = {
-dameProductos,
-crearProducto,
-obtenerProductoPorId,
-listarProductos
+    dameProductos,
+    crearProducto,
+    obtenerProductoPorId,
+    listarProductos
 };
