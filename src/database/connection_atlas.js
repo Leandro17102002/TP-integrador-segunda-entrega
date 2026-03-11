@@ -9,7 +9,7 @@ dotenv.config();
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
 
-const uri = `mongodb+srv://leandro_pelozo:${MONGO_PASSWORD}@cluster0.ya4bfoc.mongodb.net/ecommerce`;
+const uri = process.env.MONGO_URI.replace('<password>', MONGO_PASSWORD);
 
 const clientOptions = { serverApi: 
   { version: '1', 
