@@ -20,7 +20,7 @@ const listarProductos = async (req, res) => {
 }
 
 const crearProducto = async (req, res) => {
-    const {producto, precio, stock } = req.body;
+    const {producto, precio, stock} = req.body;
 
     if (!producto || !precio || !stock) {
     return res.status(400).json({
