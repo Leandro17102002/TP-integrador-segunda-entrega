@@ -6,10 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
-
-
-const uri = process.env.MONGO_URI.replace('<password>', MONGO_PASSWORD);
+const uri = process.env.MONGO_URI;
 
 const clientOptions = { serverApi: 
   { version: '1', 
